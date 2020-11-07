@@ -9,7 +9,7 @@
       "16": "img/ncepu.png"
    },
    "permissions": [
-      "tabs",
+      "https://api.douban.com/v2/book/isbn/*",
       "http://opac.ncepu.edu.cn:8080/*"
    ],
    "background": {
@@ -28,7 +28,8 @@
             "content.css"
          ],
          "matches": [
-            "https://book.douban.com/subject/*"
+            "https://book.douban.com/subject/*",
+            "http://opac.ncepu.edu.cn:8080/opac/item*"
          ]
       }
    ]

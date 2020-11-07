@@ -13,3 +13,7 @@
 #helper span:first-of-type {
     display: inline;
 }
+
+#book_pic p {
+    padding: 0;
+}

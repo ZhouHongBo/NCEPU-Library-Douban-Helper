@@ -1,6 +1,6 @@
 /* 接收查询url并返回查询结果 */
 chrome.runtime.onConnect.addListener((port) => {
-    if (port.name == "port") {
+    if (port.name === "douban") {
         port.onMessage.addListener((data, port) => {
             let xhr = new XMLHttpRequest();
             xhr.open("GET", data.url);
@@ -9,6 +9,18 @@ chrome.runtime.onConnect.addListener((port) => {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     let collectionInfo = parseInfo(xhr.response); // 书籍馆藏信息
                     port.postMessage({ message: collectionInfo }); // 发送给content.js
+                }
+            }
+        });
+    } else if (port.name === "library") {
+        port.onMessage.addListener((data, port) => {
+            console.log("test");
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", data.url);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    port.postMessage({ message: xhr.response }); // 发送给content.js
                 }
             }
         });
