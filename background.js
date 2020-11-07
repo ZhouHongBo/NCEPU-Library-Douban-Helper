@@ -32,16 +32,15 @@ function parseInfo(content) {
     let bookListInfo = $(content).find(".book_list_info"); // 书籍列表
 
     for (let i = 0; i < bookListInfo.length; i++) {
-        let arr = $(bookListInfo[i]).find("p")[0].innerText.trim().split(/\s+/);
+        let infoStr = bookListInfo[i].innerHTML;
 
-        let bookName = $(bookListInfo[i]).find("h3 a")[0].innerText;
-        let totalNum = arr[0];
-        let validNum = arr[1];
-        let authorName = arr[2];
-        let press = arr[3];
-        let time = arr[4];
-        let bookUrl = "http://opac.ncepu.edu.cn:8080/opac/" +
-            $(bookListInfo[i]).find("p a")[0].attributes.href.nodeValue;
+        let bookName = infoStr.match(/(\d\..+)<\/a>/)[1].trim();
+        let authorName = infoStr.match(/<\/span>(.+)<br>/)[1].trim();
+        let press = infoStr.match(/\n(.+)&nbsp/)[1].trim();
+        let time = infoStr.match(/;(.+)<br>/)[1].trim();
+        let totalNum = infoStr.match(/<span>(.+)<br>/)[1].trim();
+        let validNum = infoStr.match(/(可借复本.+)<\/span>/)[1].trim();
+        let bookUrl = "http://opac.ncepu.edu.cn:8080/opac/" + infoStr.match(/"(item.+)"/)[1].trim();
 
         let collection = new Collection(bookName, authorName, press, time, totalNum, validNum, bookUrl);
         collections.push(collection);

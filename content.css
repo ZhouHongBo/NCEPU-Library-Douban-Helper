@@ -9,3 +9,7 @@
     font: 12px Arial, Helvetica, sans-serif;
     color: #666666;
 }
+
+#helper span:first-of-type {
+    display: inline;
+}
