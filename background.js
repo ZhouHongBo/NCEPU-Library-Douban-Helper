@@ -25,15 +25,21 @@ function Collection(bookName, authorName, totalNum, validNum, bookUrl) {
 }
 
 // 从查询页面提取需要的书籍馆藏信息
-function parseInfo(content){
+function parseInfo(content) {
     let collections = [];
     let bookListInfo = $(content).find(".book_list_info"); // 书籍列表
-    let bookUrlInfo = $(bookListInfo).find("p a"); // 书籍链接列表
-    for (let i = 0 ; i < bookListInfo.length; i++){
-        let infoStr = bookListInfo[i].innerText;
-        let bookUrl = "http://opac.ncepu.edu.cn:8080/opac/" + bookUrlInfo[i].attributes.href.nodeValue;
-        let arr = infoStr.trim().split(/\s+/).filter((val)=>val.indexOf("/") === -1);
-        let collection = new Collection(arr[0], arr[3], arr[1], arr[2], bookUrl);
+
+    for (let i = 0; i < bookListInfo.length; i++) {
+        let arr = $(bookListInfo[i]).find("p")[0].innerText.trim().split(/\s+/);
+
+        let bookName = $(bookListInfo[i]).find("h3 a")[0].innerText;
+        let authorName = arr[2];
+        let totalNum = arr[0];
+        let validNum = arr[1];
+        let bookUrl = "http://opac.ncepu.edu.cn:8080/opac/" +
+            $(bookListInfo[i]).find("p a")[0].attributes.href.nodeValue;
+
+        let collection = new Collection(bookName, authorName, totalNum, validNum, bookUrl);
         collections.push(collection);
     }
     return collections;
