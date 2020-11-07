@@ -1,6 +1,6 @@
 ﻿/* 从豆瓣获取标题生成检索url */
 $(document).ready(function () {
-    var bookName = $("h1>span").text(); // 获取书名
+    var bookName = $("h1>span").text().split("(")[0].split("（")[0]; // 获取书名并去除括号
     var bookSearchUrl = "http://opac.ncepu.edu.cn:8080/opac/openlink.php?title=" + bookName; // 图书馆检索页网址
     var port = chrome.runtime.connect({ name: "port" }); // 与background.js建立连接
     port.postMessage({ url: bookSearchUrl }); // 发送url到图书馆检索页
