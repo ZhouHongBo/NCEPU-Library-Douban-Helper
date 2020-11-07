@@ -24,6 +24,9 @@
             "jquery.js",
             "content.js"
          ],
+         "css": [
+            "content.css"
+         ],
          "matches": [
             "https://book.douban.com/subject/*"
          ]
