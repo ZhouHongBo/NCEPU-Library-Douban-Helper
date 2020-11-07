@@ -16,9 +16,11 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 
 // 书籍馆藏信息对象
-function Collection(bookName, authorName, totalNum, validNum, bookUrl) {
+function Collection(bookName, authorName, press, time, totalNum, validNum, bookUrl) {
     this.bookName = bookName;
     this.authorName = authorName;
+    this.press = press; // 出版社
+    this.time = time; // 出版时间
     this.totalNum = totalNum; // 馆藏副本
     this.validNum = validNum; // 可借副本
     this.bookUrl = bookUrl; // 书籍详情页的链接
@@ -33,13 +35,15 @@ function parseInfo(content) {
         let arr = $(bookListInfo[i]).find("p")[0].innerText.trim().split(/\s+/);
 
         let bookName = $(bookListInfo[i]).find("h3 a")[0].innerText;
-        let authorName = arr[2];
         let totalNum = arr[0];
         let validNum = arr[1];
+        let authorName = arr[2];
+        let press = arr[3];
+        let time = arr[4];
         let bookUrl = "http://opac.ncepu.edu.cn:8080/opac/" +
             $(bookListInfo[i]).find("p a")[0].attributes.href.nodeValue;
 
-        let collection = new Collection(bookName, authorName, totalNum, validNum, bookUrl);
+        let collection = new Collection(bookName, authorName, press, time, totalNum, validNum, bookUrl);
         collections.push(collection);
     }
     return collections;

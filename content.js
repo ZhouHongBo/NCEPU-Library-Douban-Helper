@@ -21,6 +21,9 @@ function insert(collectionInfo) {
         <br>
         <span>${collectionInfo[i].authorName}</span>
         <br>
+        <span>${collectionInfo[i].press}</span>
+        <span>${collectionInfo[i].time}</span>
+        <br>
         <span>${collectionInfo[i].totalNum}</span>
         <span>${collectionInfo[i].validNum}</span>
     </li>`);
