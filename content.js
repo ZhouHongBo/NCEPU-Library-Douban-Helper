@@ -14,18 +14,22 @@ $(document).ready(function () {
 // 向豆瓣添加馆藏信息
 function insert(collectionInfo) {
     $("#buyinfo").before('<div class="gray_ad" id="helper"></div>'); // 插入div
-    $('#helper').append('<h2>华电图书馆豆瓣助手</h2><ul></ul>');
-    for (let i = 0; i < collectionInfo.length; i++) {
-        $("#helper ul").append(`<li>
-        <a target="_blank" href="${collectionInfo[i].bookUrl}">${collectionInfo[i].bookName}</a>
-        <br>
-        <span>${collectionInfo[i].authorName}</span>
-        <br>
-        <span>${collectionInfo[i].press}</span>
-        <span>${collectionInfo[i].time}</span>
-        <br>
-        <span>${collectionInfo[i].totalNum}</span>
-        <span>${collectionInfo[i].validNum}</span>
-    </li>`);
+    $("#helper").append('<h2>华电图书馆豆瓣助手</h2><ul></ul>');
+    if (collectionInfo.length === 0){
+        $("#helper").append("<span>无馆藏信息</span>");
+    } else {
+        for (let i = 0; i < collectionInfo.length; i++) {
+            $("#helper ul").append(`<li>
+            <a target="_blank" href="${collectionInfo[i].bookUrl}">${collectionInfo[i].bookName}</a>
+            <br>
+            <span>${collectionInfo[i].authorName}</span>
+            <br>
+            <span>${collectionInfo[i].press}</span>
+            <span>${collectionInfo[i].time}</span>
+            <br>
+            <span>${collectionInfo[i].totalNum}</span>
+            <span>${collectionInfo[i].validNum}</span>
+        </li>`);
+        }
     }
 }
