@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 // 向豆瓣添加馆藏信息
 function insert(collectionInfo) {
-    $("#buyinfo").before('<div class="gray_ad" id="helper"></div>'); // 插入div
+    $(".gray_ad:first").before('<div class="gray_ad" id="helper"></div>'); // 插入div
     $("#helper").append('<h2>华电图书馆豆瓣助手</h2><ul></ul>');
     if (collectionInfo.length === 0){
         $("#helper").append("<span>无馆藏信息</span>");
