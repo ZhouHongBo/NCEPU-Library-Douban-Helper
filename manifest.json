@@ -10,12 +10,12 @@
    },
    "permissions": [
       "tabs",
-      "contextMenus",
       "http://opac.ncepu.edu.cn:8080/*"
    ],
    "background": {
       "scripts": [
-         "background.js"
+         "background.js",
+         "jquery.js"
       ]
    },
    "content_scripts": [
