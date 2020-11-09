@@ -1,4 +1,4 @@
-# ncepu-library-douban-helper 华北电力大学图书馆豆瓣助手
+# 华北电力大学图书馆豆瓣助手
 
 ## 功能简介
 
@@ -6,6 +6,7 @@
 <p align="center">
   <img src="https://github.com/ZhouHongBo/ncepu-library-douban-helper/blob/main/img/douban.jpg" />
 </p>
+
 **-- 在图书馆书籍信息页面显示豆瓣评分和书籍封面**
 <p align="center">
   <img src="https://github.com/ZhouHongBo/ncepu-library-douban-helper/blob/main/img/library.jpg" />
