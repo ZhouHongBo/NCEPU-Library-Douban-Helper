@@ -45,7 +45,7 @@ function parseInfo(content) {
     for (let i = 0; i < bookListInfo.length; i++) {
         let infoStr = bookListInfo[i].innerHTML;
 
-        let bookName = infoStr.match(/(\d\..+)<\/a>/)[1].trim();
+        let bookName = (i+1) + ". " + infoStr.match(/\d\.(.+)<\/a>/)[1].trim();
         let authorName = infoStr.match(/<\/span>(.+)<br>/)[1].trim();
         let press = infoStr.match(/\n(.+)&nbsp/)[1].trim();
         let time = infoStr.match(/;(.+)<br>/)[1].trim();
