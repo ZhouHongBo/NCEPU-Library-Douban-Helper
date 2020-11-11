@@ -14,7 +14,6 @@ chrome.runtime.onConnect.addListener((port) => {
         });
     } else if (port.name === "library") {
         port.onMessage.addListener((data, port) => {
-            console.log("test");
             let xhr = new XMLHttpRequest();
             xhr.open("GET", data.url);
             xhr.send();

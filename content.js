@@ -11,7 +11,8 @@
             insertToDouban(data.message);
         });
     } else {
-        let isbn = $(".booklist dd:eq(2)").text().split("/")[0].split("-").join(""); // 图书的ISBN编号
+        // let isbn = $(".booklist dd:eq(2)").text().split("/")[0].split("-").join(""); // 图书的ISBN编号
+        let isbn = getIsbn();
         let bookSearchUrl = "https://api.douban.com/v2/book/isbn/" + isbn + "?apikey=054022eaeae0b00e0fc068c0c0a2102a"; // 豆瓣api
         let port = chrome.runtime.connect({ name: "library" }); // 与background.js建立连接
         port.postMessage({ url: bookSearchUrl }); // 发送url到图书馆检索页
@@ -22,6 +23,11 @@
         });
     }
 });
+
+// 获得图书的ISBN编号
+function getIsbn() {
+    return $("#item_detail").text().match(/\n(.+\-\d)/)[1].trim().split("-").join("");
+}
 
 // 向豆瓣添加馆藏信息
 function insertToDouban(collectionInfo) {
@@ -51,12 +57,22 @@ function insertToLibrary(bookInfo) {
     let imgSrc = bookInfo.images.large; // 图书地址
     let rating = bookInfo.rating.average; // 豆瓣评分
     let numRaters = bookInfo.rating.numRaters; // 评分人数
+    let rateText = ""; // 描述有多少人评价的文本
+
+    // 处理评价人数不足的情况
+    if (rating === "0.0") {
+        rating = "";
+        rateText = "评价人数不足";
+    } else {
+        rateText = numRaters + "人评价";
+    }
+
     $("#book_img").attr("src", imgSrc);
     $("#book_pic").append(`
         <div class="rating-logo">豆瓣评分<strong>${rating}</strong></div>
         <div class="star"></div>
         <div class="rating-sum">
-            ${numRaters}人评价
+            ${rateText}
         </div>
     `);
     backgroundPosition(rating);
@@ -89,7 +105,10 @@ function backgroundPosition(rating) {
         case rating >= 2.5:
             $(".star").css("background-position", "0 -105px");
             break;
-        default:
+        case rating >= 1.5:
             $(".star").css("background-position", "0 -120px");
+            break;
+        default:
+            $(".star").css("background-position", "0 -150px");
     }
 }
