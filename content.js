@@ -52,6 +52,44 @@ function insertToLibrary(bookInfo) {
     let rating = bookInfo.rating.average; // 豆瓣评分
     let numRaters = bookInfo.rating.numRaters; // 评分人数
     $("#book_img").attr("src", imgSrc);
-    $("#book_pic").append(`<p>豆瓣评分${rating}</p>`);
-    $("#book_pic").append(`<p>${numRaters}人评价</p>`);
+    $("#book_pic").append(`
+        <div class="rating-logo">豆瓣评分<strong>${rating}</strong></div>
+        <div class="star"></div>
+        <div class="rating-sum">
+            ${numRaters}人评价
+        </div>
+    `);
+    backgroundPosition(rating);
+}
+
+// 根据评分调整background-position
+function backgroundPosition(rating) {
+    switch (true) {
+        case rating >= 9.5:
+            $(".star").css("background-position", "0 0");
+            break;
+        case rating >= 8.5:
+            $(".star").css("background-position", "0 -15px");
+            break;
+        case rating >= 7.5:
+            $(".star").css("background-position", "0 -30px");
+            break;
+        case rating >= 6.5:
+            $(".star").css("background-position", "0 -45px");
+            break;
+        case rating >= 5.5:
+            $(".star").css("background-position", "0 -60px");
+            break;
+        case rating >= 4.5:
+            $(".star").css("background-position", "0 -75px");
+            break;
+        case rating >= 3.5:
+            $(".star").css("background-position", "0 -90px");
+            break;
+        case rating >= 2.5:
+            $(".star").css("background-position", "0 -105px");
+            break;
+        default:
+            $(".star").css("background-position", "0 -120px");
+    }
 }

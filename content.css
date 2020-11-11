@@ -1,3 +1,5 @@
+/* 豆瓣图书页面 */
+
 #helper li {
     border-bottom: 1px solid rgba(0,0,0,0.08);
     padding: 10px 0;
@@ -14,6 +16,10 @@
     display: inline;
 }
 
-#book_pic p {
-    padding: 0;
+/* 华电图书馆图书页面 */
+.star {
+    width: 75px;
+    height: 15px;
+    margin: 0 auto;
+    background-image: url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png);
 }
