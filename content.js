@@ -54,7 +54,8 @@ function insertToDouban(collectionInfo) {
 
 // 向图书馆网站的图书页面添加图片和豆瓣评分信息
 function insertToLibrary(bookInfo) {
-    let imgSrc = bookInfo.images.large; // 图书地址
+    let bookUrl = bookInfo.alt;
+    let imgSrc = bookInfo.images.large; // 图书封面地址
     let rating = bookInfo.rating.average; // 豆瓣评分
     let numRaters = bookInfo.rating.numRaters; // 评分人数
     let rateText = ""; // 描述有多少人评价的文本
@@ -69,7 +70,12 @@ function insertToLibrary(bookInfo) {
 
     $("#book_img").attr("src", imgSrc);
     $("#book_pic").append(`
-        <div class="rating-logo">豆瓣评分<strong>${rating}</strong></div>
+        <div class="rating-logo">
+            <a target="_blank" href=${bookUrl}>豆瓣</a>评分
+            <strong>
+                ${rating}
+            </strong>
+        </div>
         <div class="star"></div>
         <div class="rating-sum">
             ${rateText}
